@@ -46,23 +46,30 @@ def employee_todos(Emp_name, Emp_id):
 def csv_formatting(Emp_name, todos_data, Emp_id):
     filename = Emp_id
     with open('{}.csv'.format(filename), 'w', newline='') as user_file:
-        fieldnames = ['USER_ID', 'USERNAME',
-                      'TASK_COMPLETED_STATUS', 'TASK_TITLE']
+        # fieldnames = ['USER_ID', 'USERNAME',
+        #               'TASK_COMPLETED_STATUS', 'TASK_TITLE']
 
-        thewriter = csv.DictWriter(user_file, fieldnames=fieldnames)
+        # thewriter = csv.DictWriter(user_file, fieldnames=fieldnames)
 
-        thewriter.writeheader()
+        # thewriter.writeheader()
 
         for tasks in todos_data:
-            thewriter.writerow({
-                'USER_ID': tasks.get('userId'),
-                'USERNAME': Emp_name,
-                'TASK_COMPLETED_STATUS': tasks.get('completed'),
-                'TASK_TITLE': tasks.get('title')
-            })
+            user_file.write('"{}","{}","{}","{}"\n'.format(
+                filename,
+                Emp_name,
+                tasks.get('completed'),
+                tasks.get('title')
+            ))
+        # for tasks in todos_data:
+        #     thewriter.writerow({
+        #         'USER_ID': "{}".format(tasks.get('userId')),
+        #         'USERNAME': "{}".format(Emp_name),
+        #         'TASK_COMPLETED_STATUS': "{}".format(tasks.get('completed')),
+        #         'TASK_TITLE': "{}".format(tasks.get('title'))
+        #     })
 
-        if thewriter:
-            print(f"{user_file.name} was created successfuly!!")
+        # if thewriter:
+        #     print(f"{user_file.name} was created successfuly!!")
 
 
 def main():
